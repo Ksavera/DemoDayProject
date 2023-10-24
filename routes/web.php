@@ -38,4 +38,4 @@ Route::get('/profile/new', [PrivateController::class, 'newProfile'])->name('newP
 Route::post('/profile/new', [PrivateController::class, 'saveProfile'])->name('saveProfile');
 Route::get('/profile/edit/{id}', [PrivateController::class, 'editProfile'])->name('editProfile');
 Route::post('/profile/edit/{id}', [PrivateController::class, 'updateProfile'])->name('updateProfile');
-Route::delete('/profile/delete/{id}', [PrivateController::class, 'deleteProfile'])->name('deleteProfile');
+Route::get('/profile/delete/{id}', [PrivateController::class, 'deleteProfile'])->name('deleteProfile');

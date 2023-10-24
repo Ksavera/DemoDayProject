@@ -39,9 +39,6 @@ class PrivateController extends Controller
                     'about' => 'required|min:3',
                     'location' => 'required|min:3'
 
-                ],
-                [
-                    'first_name.required' => 'pamirsai'
                 ]
             );
 
