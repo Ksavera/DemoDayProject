@@ -8,9 +8,13 @@ use App\Models\Account;
 
 class HomeController extends Controller
 {
-    public function homePage()
-     $profiles = Account::get();
 
 
-        return view('profile.myProfile', ['profiles' => $profiles]);
+    public function home()
+    {
+        $profiles = Account::with('user')->get();
+
+
+        return view('home', ['profiles' => $profiles]);
+    }
 }

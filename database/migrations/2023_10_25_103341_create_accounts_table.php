@@ -18,10 +18,14 @@ return new class extends Migration
             $table->string('profile_image')->nullable();
             $table->text('skills');
             $table->text('about');
-            $table->string('location');
+            $table->string('linkedin')->nullable();
+            $table->string('github')->nullable();
+            $table->string('phone')->nullable();
             $table->integer('views')->default(0);
             //jei istrinsim vartotoja, istrinsim ir profili.
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('category_id')->nullable()->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('location_id')->nullable()->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

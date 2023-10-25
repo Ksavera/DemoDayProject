@@ -5,14 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Photo extends Model
+class Portfolio extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'name',
+        'photo',
+        'description',
+        'github',
         'likes',
-        'profession_id',
+        'category_id',
         'account_id'
     ];
+
+    public function accounts()
+    {
+        return $this->belongsTo(Account::class);
+    }
 }

@@ -27,7 +27,10 @@
         <main class="py-4">
 
             @yield('content')
-            @yield('profile')
+            @yield('myProfile')
+            @yield('profileForm')
+            @yield('galleryForm')
+
         </main>
         @include('layouts.footer');
     </div>

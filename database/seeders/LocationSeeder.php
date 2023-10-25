@@ -14,5 +14,32 @@ class LocationSeeder extends Seeder
      */
     public function run(): void
     {
+        $locations = [
+            "Vilnius",
+            "Kaunas",
+            "Klaipėda",
+            "Šiauliai",
+            "Panevėžys",
+            "Alytus",
+            "Marijampolė",
+            "Mazeikiai",
+            "Jonava",
+            "Utena",
+            "Kėdainiai",
+            "Telšiai",
+            "Visaginas",
+            "Tauragė",
+            "Ukmergė",
+            "Plungė",
+            "Šilutė",
+            "Kretinga",
+            "Radviliškis",
+            "Palanga",
+            "Neringa",
+        ];
+
+        foreach ($locations as $location) {
+            Location::create(['name' => $location]);
+        }
     }
 }

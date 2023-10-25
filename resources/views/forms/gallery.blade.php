@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('profileForm')
+@section('galleryForm')
 
 
 @if(session()->has('success'))
@@ -41,36 +41,8 @@
             <input type="text" class="form-control" name="about" value="{{ old('about',isset($profile)? $profile->about: '') }}">
         </div>
         <div class="mt-3">
-            <label for="">Linkedin: </label>
-            <input type="text" class="form-control" name="linkedin" value="{{ old('linkedin',isset($profile)? $profile->linkedin: '') }}">
-        </div>
-        <div class="mt-3">
-            <label for="">github: </label>
-            <input type="text" class="form-control" name="github" value="{{ old('github',isset($profile)? $profile->github: '') }}">
-        </div>
-        <div class="mt-3">
-            <label for="">phone: </label>
-            <input type="text" class="form-control" name="phone" value="{{ old('phone',isset($profile)? $profile->phone: '') }}">
-        </div>
-        <div class="mt-3">
-            <label>Category:</label>
-            <select class="form-select" name="category">
-                <option selected>Select a category</option>
-                @foreach($categories as $category)
-                <option value="{{ $category->id }}">{{ $category['name'] }}</option>
-                <!-- old($category['id'], isset($profile) ? $profile->id : '') -->
-                @endforeach
-            </select>
-        </div>
-
-        <div class="mt-3">
-            <label>Location:</label>
-            <select class="form-select" name="location">
-                <option selected>Select location</option>
-                @foreach($locations as $location)
-                <option value="{{$location['id']}}">{{$location['name']}}</option>
-                @endforeach
-            </select>
+            <label for="">Location: </label>
+            <input type="text" class="form-control" name="location" value="{{  old('location',isset($profile)? $profile->location: '')}}">
         </div>
         <div class="mt-3">
             <label for="">Profile image: </label>

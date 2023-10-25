@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Account;
 use App\Http\Requests\StoreAccountRequest;
 use App\Http\Requests\UpdateAccountRequest;
-use App\Models\User;
+
 
 class AccountController extends Controller
 {
@@ -14,8 +14,8 @@ class AccountController extends Controller
      */
     public function myProfile()
     {
-
-        $profiles = Account::get();
+        $userId = auth()->id();
+        $profiles = Account::where('user_id', $userId)->with('user')->get();
 
 
         return view('profile.myProfile', ['profiles' => $profiles]);

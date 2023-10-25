@@ -36,12 +36,17 @@
                     @if (auth()->check())
                     @if (App\Models\Account::where('user_id', auth()->user()->id)->exists())
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/profile') }}">{{ __('My Profile') }}</a>
+                        <a class="nav-link" href="{{ route('newGallery') }}">{{ __('Create Gallery') }}</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('profile.myProfile') }}">{{ __('My Profile') }}</a>
+                    </li>
+
                     @else
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('newProfile') }}">{{ __('Create Profile') }}</a>
                     </li>
+
                     @endif
                     @endif
                     <li class="nav-item dropdown">
