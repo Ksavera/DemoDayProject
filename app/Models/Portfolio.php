@@ -19,8 +19,12 @@ class Portfolio extends Model
         'account_id'
     ];
 
-    public function accounts()
+    public function account()
     {
         return $this->belongsTo(Account::class);
+    }
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
     }
 }

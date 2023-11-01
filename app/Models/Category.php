@@ -13,7 +13,7 @@ class Category extends Model
         'name',
     ];
 
-    public function account()
+    public function accounts()
     {
         return $this->hasMany(Account::class);
     }

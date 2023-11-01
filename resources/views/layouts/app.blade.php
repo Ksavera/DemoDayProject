@@ -31,6 +31,7 @@
             @yield('profileForm')
             @yield('galleryForm')
 
+
         </main>
         @include('layouts.footer');
     </div>

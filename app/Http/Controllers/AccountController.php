@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Account;
+use App\Models\Portfolio;
 use App\Http\Requests\StoreAccountRequest;
 use App\Http\Requests\UpdateAccountRequest;
 
@@ -14,12 +15,25 @@ class AccountController extends Controller
      */
     public function myProfile()
     {
-        $userId = auth()->id();
-        $profiles = Account::where('user_id', $userId)->with('user')->get();
+        $profiles = Account::where('user_id', auth()->id())->get();
+        $galleries = [];
+        $categories = [];
 
+        if ($profiles->isNotEmpty()) {
+            // Assuming there is only one account per user
 
-        return view('profile.myProfile', ['profiles' => $profiles]);
+            $account = $profiles->first();
+
+            $galleries = Portfolio::where('account_id', $account->id)->get();
+            $categories = $galleries->load('category');
+        }
+
+        return view('profile.myProfile', ['profiles' => $profiles, 'galleries' => $galleries, 'categories' => $categories]);
     }
+
+
+
+
 
     /**
      * Show the form for creating a new resource.

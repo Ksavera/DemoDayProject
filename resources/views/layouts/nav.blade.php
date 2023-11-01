@@ -1,9 +1,9 @@
 <header>
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/welcome') }}">
-                {{ config('app.name', 'Laravel') }}
-            </a>
+            <!-- <a class="navbar-brand" href="{{ url('/welcome') }}">
+                {{ config('app.name', 'KA') }}
+            </a> -->
 
             <a class="nav-link" href="{{ url('/') }}">{{ __('Home') }}</a>
 
@@ -36,7 +36,7 @@
                     @if (auth()->check())
                     @if (App\Models\Account::where('user_id', auth()->user()->id)->exists())
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('newGallery') }}">{{ __('Create Gallery') }}</a>
+                        <a class="nav-link" href="{{ route('newGallery') }}">{{ __('Create Project') }}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('profile.myProfile') }}">{{ __('My Profile') }}</a>

@@ -16,20 +16,17 @@
  @endforeach
  @endif
 
- <div class="album py-5 bg-light">
+ <div class="container">
+     <!-- <h5 class="text-center mt-5 text-warning">Students lists will be displayed here</h5>
+    <div class="border">
+        <img src="{{url('/photos/imageedit_1_9141295572.png')}}" alt="" width="20%">
+    </div> -->
      <div class="row gap-2 m-0">
-         @foreach($profiles as $profile)
+         @foreach($galleries as $gallery)
 
-         <div class="col-2 border ">
-             <a href="{{route('profileView', $profile->id)}}" class="link-underline link-underline-opacity-0 link-body-emphasis">
-                 <img src="{{ asset('storage/' . $profile->profile_image) }}" class="rounded-circle my-2" style="margin-right: 15px">
-                 <h5 class="text-center">{{$profile->first_name}} {{$profile->last_name}}</h5>
-                 <h6 class="text-center m-0">{{$profile->location->name}} | {{$profile->category->name}}</h6>
-                 <p class="text-center "><small>Views: {{$profile->views}}</small></p>
-             </a>
+         <div class="col-2 ">
+             <img src="{{ asset('storage/' . $gallery->photo) }}" class="rounded-circle my-2" style="margin-right: 15px">
+             <h5 class="text-center">{{$gallery->name}}</h5>
          </div>
-
-
          @endforeach
      </div>
- </div>

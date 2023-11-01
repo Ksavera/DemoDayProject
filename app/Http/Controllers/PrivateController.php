@@ -6,6 +6,7 @@ use App\Models\Account;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Category;
 use App\Models\Location;
+use App\Models\Portfolio;
 use Illuminate\Http\Request;
 
 
@@ -20,12 +21,11 @@ class PrivateController extends Controller
     }
 
 
-
     public function newProfile(Request $request)
     {
         $categories = Category::all();
         $locations = Location::all();
-        return view('forms.profile', ['categories' => $categories, 'locations' => $locations]);
+        return view('forms.profileForm', ['categories' => $categories, 'locations' => $locations]);
     }
 
     // Profile
@@ -44,6 +44,7 @@ class PrivateController extends Controller
             'phone' => 'required|min:3',
             'category' => 'required',
             'location' => 'required',
+            'views' => 'default:0',
         ]);
 
         // Handle file upload and save profile
@@ -69,25 +70,25 @@ class PrivateController extends Controller
             $profile = new Account;
         }
 
-        return view('forms.profile', ['profile' => $profile, 'categories' => $categories, 'locations' => $locations]);
+        return view('forms.profileForm', ['profile' => $profile, 'categories' => $categories, 'locations' => $locations]);
     }
 
 
     public function updateProfile(int $id, Request $request)
     {
         $validated = $request->validate(
+
             [
                 'first_name' => 'required|min:3|max:200',
                 'last_name' => 'required|min:3|max:200',
-                'profile_image' => 'required|file|image|max:10000',
+                'profile_image' => 'nullable|file|image|max:10000',
                 'skills' => 'required|min:3',
                 'about' => 'required|min:3',
-                'category' => 'required',
-                'location' => 'required'
+                'linkedin' => 'required|min:3',
+                'github' => 'required|min:3',
+                'phone' => 'required|min:3',
             ],
-            [
-                'first_name.required' => 'Neuzpildytas vardas'
-            ]
+
         );
 
         // Find the profile
@@ -107,13 +108,15 @@ class PrivateController extends Controller
             $profile->profile_image = $filePath;
         }
 
-        // Update the profile with the new data
-        $profile->first_name = $request->input('first_name');
-        $profile->last_name = $request->input('last_name');
-        $profile->skills = $request->input('skills');
-        $profile->about = $request->input('about');
-        $profile->category_id = $request->input('category');
-        $profile->location_id = $request->input('location');
+
+        $profile->first_name = $validated['first_name'];
+        $profile->last_name = $validated['last_name'];
+        $profile->skills = $validated['skills'];
+        $profile->about = $validated['about'];
+        $profile->linkedin = $validated['linkedin'];
+        $profile->github = $validated['github'];
+        $profile->phone = $validated['phone'];
+
         // ... other fields
         $profile->save();
 
@@ -145,30 +148,120 @@ class PrivateController extends Controller
 
     public function newGallery()
     {
-        return view('forms.gallery');
+        return view('forms.galleryForm');
     }
 
 
-    // public function saveGallery(Request $request)
-    // {
-    //     // Validate the request
-    //     $validated = $request->validate([
-    //         'first_name' => 'required|min:3|max:200',
-    //         'last_name' => 'required|min:3|max:200',
-    //         'profile_image' => 'required|max:10000|mimes:jpg,png',
-    //         'skills' => 'required|min:3',
-    //         'about' => 'required|min:3',
-    //         'location' => 'required|min:3'
-    //     ]);
+    public function saveGallery(Request $request)
+    {
+        logger($request->all());
+        // Validate the request
+        $validated = $request->validate([
+            'name' => 'required|min:3|max:200',
+            'description' => 'required|min:3|max:200',
+            'github' => 'required|min:3|max:300',
+            'photo' => 'required|max:10000|mimes:jpg,png',
+        ]);
 
-    //     // Handle file upload and save profile
-    //     $validated['profile_image'] = $request->file('profile_image')->store('profilePhotos', 'public');
-    //     $validated['user_id'] = auth()->user()->id;
-    //     Account::create($validated);
+        $account = Account::where('user_id', auth()->id())->first();
 
-    //     Log::info('Account created successfully: ', ['account_id' => auth()->user()->id]);
+        // Handle file upload and save profile
+        $validated['photo'] = $request->file('photo')->store('projectPhotos', 'public');
+        $validated['account_id'] = $account->id;
+        $validated['category_id'] = $account->category_id;
 
-    //     // Redirect to the profile page with a success message
-    //     return redirect()->route('profile.myProfile')->with('success', 'Profile uploaded successfully');
-    // }
+        Portfolio::create($validated);
+
+
+        // Redirect to the profile page with a success message
+        return redirect()->route('profile.myProfile')->with('success', 'Gallery uploaded successfully');
+    }
+
+    public function editGallery(int $id)
+    {
+        $gallery = Portfolio::find($id);
+        $account = Account::where('user_id', auth()->id())->first();
+        $category_id = $account->category_id;
+
+        if (!$gallery) {
+            // No profile was found, create an empty Account object
+            $gallery = new Portfolio;
+            $gallery->account_id = auth()->id();
+        }
+
+        return view('forms.galleryForm', ['gallery' => $gallery, 'category_id' => $category_id]);
+    }
+
+
+
+
+    public function updateGallery(int $id, Request $request)
+    {
+        $validated = $request->validate(
+
+            [
+                'name' => 'required|min:3|max:200',
+                'description' => 'required|min:3|max:200',
+                'github' => 'required|min:3|max:200',
+                'photo' => 'nullable|file|image|max:10000',
+
+            ],
+            [
+                'name.required' => 'Neuzpildytas gallery name',
+                'account_id.required' => 'Account ID is required',
+            ]
+        );
+
+        $gallery = Portfolio::findOrFail($id);
+
+        if ($request->hasFile('photo')) {
+            // Delete the old image if it exists
+            if ($gallery->photo) {
+                Storage::delete('public/' . $gallery->photo);
+            }
+
+            // Store the new image and get the file path
+            $filePath = $request->file('photo')->store('projectPhotos', 'public');
+
+            // Update the photo field with the new file path
+            $gallery->photo = $filePath;
+        }
+
+        // Update the gallery with the new data
+        $gallery->name = $validated['name'];
+        $gallery->description = $validated['description'];
+        $gallery->github = $validated['github'];
+
+
+
+        // ... other fields
+        $gallery->save();
+
+        // Redirect to the profile page with a success message
+        return redirect()->route('profile.myProfile')->with('success', 'Gallery updated successfully');
+    }
+
+
+
+
+
+    public function deleteGallery(int $id)
+    {
+
+        $gallery = Portfolio::find($id);
+
+        if (!$gallery) {
+            return redirect()->route('profile.myGallery')->with('error', 'Gallery not found');
+        }
+
+        // Delete the profile image if it exists
+        if ($gallery->photo) {
+            Storage::delete('public/' . $gallery->photo);
+        }
+
+        // Delete the profile record
+        $gallery->delete();
+
+        return redirect()->route('profile.myProfile')->with('success', 'Gallery deleted successfully');
+    }
 }

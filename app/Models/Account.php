@@ -34,7 +34,7 @@ class Account extends Model
         return $this->belongsTo(Location::class, 'location_id');
     }
 
-    public function categories()
+    public function category()
     {
         return $this->belongsTo(Category::class);
     }
