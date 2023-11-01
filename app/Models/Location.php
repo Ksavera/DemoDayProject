@@ -11,8 +11,8 @@ class Location extends Model
 
     protected $fillable = ['name'];
 
-    public function accounts()
+    public function profiles()
     {
-        return $this->hasMany(Account::class);
+        return $this->hasMany(Profile::class);
     }
 }

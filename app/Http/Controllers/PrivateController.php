@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Account;
+use App\Models\Profile;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Category;
 use App\Models\Location;
@@ -53,7 +53,7 @@ class PrivateController extends Controller
         $validated['location_id'] = $request->input('location');
         $validated['user_id'] = auth()->user()->id;
 
-        Account::create($validated);
+        Profile::create($validated);
 
 
         // Redirect to the profile page with a success message
@@ -62,12 +62,12 @@ class PrivateController extends Controller
 
     public function editProfile(int $id)
     {
-        $profile = Account::find($id);
+        $profile = Profile::find($id);
         $categories = Category::all();
         $locations = Location::all();
         if (!$profile) {
-            // No profile was found, create an empty Account object
-            $profile = new Account;
+            // No profile was found, create an empty Profile object
+            $profile = new Profile;
         }
 
         return view('forms.profileForm', ['profile' => $profile, 'categories' => $categories, 'locations' => $locations]);
@@ -92,7 +92,7 @@ class PrivateController extends Controller
         );
 
         // Find the profile
-        $profile = Account::findOrFail($id);
+        $profile = Profile::findOrFail($id);
 
         // Handle file upload
         if ($request->hasFile('profile_image')) {
@@ -127,7 +127,7 @@ class PrivateController extends Controller
     public function deleteProfile(int $id)
     {
 
-        $profile = Account::find($id);
+        $profile = Profile::find($id);
 
         if (!$profile) {
             return redirect()->route('profile.myProfile')->with('error', 'Profile not found');
@@ -163,12 +163,12 @@ class PrivateController extends Controller
             'photo' => 'required|max:10000|mimes:jpg,png',
         ]);
 
-        $account = Account::where('user_id', auth()->id())->first();
+        $Profile = Profile::where('user_id', auth()->id())->first();
 
         // Handle file upload and save profile
         $validated['photo'] = $request->file('photo')->store('projectPhotos', 'public');
-        $validated['account_id'] = $account->id;
-        $validated['category_id'] = $account->category_id;
+        $validated['Profile_id'] = $Profile->id;
+        $validated['category_id'] = $Profile->category_id;
 
         Portfolio::create($validated);
 
@@ -180,13 +180,13 @@ class PrivateController extends Controller
     public function editGallery(int $id)
     {
         $gallery = Portfolio::find($id);
-        $account = Account::where('user_id', auth()->id())->first();
-        $category_id = $account->category_id;
+        $Profile = Profile::where('user_id', auth()->id())->first();
+        $category_id = $Profile->category_id;
 
         if (!$gallery) {
-            // No profile was found, create an empty Account object
+            // No profile was found, create an empty Profile object
             $gallery = new Portfolio;
-            $gallery->account_id = auth()->id();
+            $gallery->Profile_id = auth()->id();
         }
 
         return view('forms.galleryForm', ['gallery' => $gallery, 'category_id' => $category_id]);
@@ -208,7 +208,7 @@ class PrivateController extends Controller
             ],
             [
                 'name.required' => 'Neuzpildytas gallery name',
-                'account_id.required' => 'Account ID is required',
+                'Profile_id.required' => 'Profile ID is required',
             ]
         );
 

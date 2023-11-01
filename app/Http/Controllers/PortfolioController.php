@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Account;
+use App\Models\Profile;
 use App\Models\Portfolio;
 use Illuminate\Support\Facades\Storage;
 
@@ -17,7 +17,7 @@ class PortfolioController extends Controller
 
 
         // Retrieve the associated account
-        $account = Account::find($gallery->account_id);
+        $account = Profile::find($gallery->account_id);
 
         return view('profile.myProfile', ['account' => $account, 'gallery' => $gallery]);
     }

@@ -16,12 +16,12 @@ class Portfolio extends Model
         'github',
         'likes',
         'category_id',
-        'account_id'
+        'profile_id'
     ];
 
-    public function account()
+    public function profile()
     {
-        return $this->belongsTo(Account::class);
+        return $this->belongsTo(Profile::class);
     }
     public function category()
     {

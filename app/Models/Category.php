@@ -13,8 +13,8 @@ class Category extends Model
         'name',
     ];
 
-    public function accounts()
+    public function profiles()
     {
-        return $this->hasMany(Account::class);
+        return $this->hasMany(Profile::class);
     }
 }

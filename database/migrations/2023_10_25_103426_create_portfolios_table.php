@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('github');
             $table->string('likes')->nullable();
             $table->foreignId('category_id')->nullable()->constrained()->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('account_id')->nullable()->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('profile_id')->nullable()->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

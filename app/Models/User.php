@@ -43,8 +43,8 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function accounts()
+    public function profile()
     {
-        return $this->belongsTo(Account::class);
+        return $this->belongsTo(Profile::class);
     }
 }

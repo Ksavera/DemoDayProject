@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Account;
+use App\Models\Profile;
 use App\Models\Portfolio;
 
 class HomeController extends Controller
@@ -11,7 +11,7 @@ class HomeController extends Controller
 
     public function home()
     {
-        $profiles = Account::with('user')->orderBy('views', 'desc')->get();
+        $profiles = Profile::with('user')->orderBy('views', 'desc')->get();
 
         $galleries = Portfolio::all();
 

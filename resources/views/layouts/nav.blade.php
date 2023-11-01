@@ -34,7 +34,7 @@
                     @endif
                     @else
                     @if (auth()->check())
-                    @if (App\Models\Account::where('user_id', auth()->user()->id)->exists())
+                    @if (App\Models\Profile::where('user_id', auth()->user()->id)->exists())
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('newGallery') }}">{{ __('Create Project') }}</a>
                     </li>
