@@ -22,11 +22,11 @@
         <img src="{{url('/photos/imageedit_1_9141295572.png')}}" alt="" width="20%">
     </div> -->
      <div class="row gap-2 m-0">
-         @foreach($galleries as $gallery)
+         @foreach($projects as $project)
 
          <div class="col-2 ">
-             <img src="{{ asset('storage/' . $gallery->photo) }}" class="rounded-circle my-2" style="margin-right: 15px">
-             <h5 class="text-center">{{$gallery->name}}</h5>
+             <img src="{{ asset('storage/' . $project->photo) }}" class="rounded-circle my-2" style="margin-right: 15px">
+             <h5 class="text-center">{{$project->name}}</h5>
          </div>
          @endforeach
      </div>

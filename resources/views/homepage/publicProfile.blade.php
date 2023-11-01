@@ -8,9 +8,9 @@
         <h1>Here you will see the selected profile's info</h1>
         <p>{{$profile->first_name}}</p>
         <!-- ... other profile information ... -->
-        <h1>Sukurtos Galerijos</h1>
-        @foreach($galleries as $gallery)
-        <p>{{$gallery->name}}</p>
+        <h1>Sukurti Projektai</h1>
+        @foreach($projects as $project)
+        <p>{{$projects->name}}</p>
         @endforeach
     </div>
 </section>

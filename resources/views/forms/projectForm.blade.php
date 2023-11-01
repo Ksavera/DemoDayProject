@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('galleryForm')
+@section('projectForm')
 
 
 @if(session()->has('success'))
@@ -21,24 +21,24 @@
 @endif
 
 <div class="container w-25 border">
-    <form action="{{ isset($gallery) ? route('updateGallery', $gallery->id) : route('saveGallery') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ isset($project) ? route('updateProject', $project->id) : route('saveProject') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        @if(isset($gallery))
+        @if(isset($project))
         @method('PUT')
         @endif
 
         <div class="mt-3">
             <label for="">Project name: </label>
-            <input type="text" class="form-control" name="name" value="{{ old('name', isset($gallery) ? $gallery->name : '') }}">
+            <input type="text" class="form-control" name="name" value="{{ old('name', isset($project) ? $project->name : '') }}">
         </div>
 
         <div class="mt-3">
             <label for="">Description: </label>
-            <input type="text" class="form-control" name="description" value="{{  old('description',isset($gallery)? $gallery->description: '') }}">
+            <input type="text" class="form-control" name="description" value="{{  old('description',isset($project)? $project->description: '') }}">
         </div>
         <div class="mt-3">
             <label for="">Github: </label>
-            <input type="text" class="form-control" name="github" value="{{ old('github',isset($gallery)? $gallery->github: '') }}">
+            <input type="text" class="form-control" name="github" value="{{ old('github',isset($project)? $project->github: '') }}">
         </div>
 
 
@@ -51,7 +51,7 @@
 
         <div class="d-flex justify-content-end gap-3">
             <div class="mt-3 d-flex justify-content-end">
-                <button type="submit" class="btn btn-outline-primary" value="create">{{ isset($gallery) ? 'Update' : 'Save' }}</button>
+                <button type="submit" class="btn btn-outline-primary" value="create">{{ isset($project) ? 'Update' : 'Save' }}</button>
 
             </div>
         </div>

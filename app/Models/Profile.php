@@ -39,8 +39,8 @@ class Profile extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function portfolios()
+    public function projects()
     {
-        return $this->hasMany(Portfolio::class);
+        return $this->hasMany(Project::class);
     }
 }

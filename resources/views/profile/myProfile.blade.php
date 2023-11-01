@@ -51,10 +51,10 @@
              </div>
          </div>
 
-         <!-- Gallery view atvaizdavimas-->
+         <!-- Project view atvaizdavimas-->
          @if (isset($profiles) && !$profiles->isEmpty())
-         <!-- Check if galleries exist -->
-         @if (isset($galleries) && !$galleries->isEmpty())
+         <!-- Check if projects exist -->
+         @if (isset($projects) && !$projects->isEmpty())
          <main role="main">
 
 
@@ -63,8 +63,8 @@
                      <div class="container">
                          <h2 class="text-center my-3">Projects</h2>
                          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                             @foreach ($galleries as $gallery)
-                             @include('components.gallery', ['gallery' => $gallery])
+                             @foreach ($projects as $project)
+                             @include('components.project', ['project' => $project])
                              @endforeach
                              @endif
                              @endif

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Profile;
-use App\Models\Portfolio;
+use App\Models\Project;
 
 class HomeController extends Controller
 {
@@ -13,9 +13,9 @@ class HomeController extends Controller
     {
         $profiles = Profile::with('user')->orderBy('views', 'desc')->get();
 
-        $galleries = Portfolio::all();
+        $projects = Project::all();
 
 
-        return view('home', ['profiles' => $profiles, 'galleries' => $galleries]);
+        return view('home', ['profiles' => $profiles, 'projects' => $projects]);
     }
 }

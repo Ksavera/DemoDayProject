@@ -6,7 +6,7 @@
         <h2 class="text-center">Students</h2>
         @include('homepage.students')
         <h2 class="text-center mt-5 mb-3">Projects</h2>
-        @include('homepage.galleriesView')
+        @include('homepage.projectsView')
 
     </div>
 </section>

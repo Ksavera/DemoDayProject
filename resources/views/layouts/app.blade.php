@@ -29,7 +29,7 @@
             @yield('content')
             @yield('myProfile')
             @yield('profileForm')
-            @yield('galleryForm')
+            @yield('projectForm')
 
 
         </main>
