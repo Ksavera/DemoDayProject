@@ -13,8 +13,7 @@ class HomeController extends Controller
     {
         $profiles = Profile::with('user')->orderBy('views', 'desc')->get();
 
-        $projects = Project::all();
-
+        $projects = Project::with('profile')->get();
 
         return view('home', ['profiles' => $profiles, 'projects' => $projects]);
     }

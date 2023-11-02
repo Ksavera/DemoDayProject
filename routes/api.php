@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Api\LikeController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,6 +16,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function () {
+    //initial route provided
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+
+    //add new api routes
+    Route::post('project/{id}/like', [LikeController::class, 'likes'])->name('likes');
 });

@@ -37,4 +37,11 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    protected function authenticated($request, $user)
+    {
+        // Call the method to generate the API token
+        $token = $user->createToken('my-app-token')->plainTextToken;
+        $request->session()->put('api_token', $token);
+    }
 }
