@@ -1,19 +1,28 @@
 <header>
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
-            <!-- <a class="navbar-brand" href="{{ url('/welcome') }}">
+            <a class="navbar-brand" href="{{ url('/') }}">
                 {{ config('app.name', 'KA') }}
-            </a> -->
-
-            <a class="nav-link" href="{{ url('/') }}">{{ __('Home') }}</a>
-
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
-
+                <div>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/') }}">{{ __('Home') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('students') }}">{{ __('Students') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/projects') }}">{{ __('Projects') }}</a>
+                        </li>
+                    </ul>
+                </div>
 
                 <!-- Right Side Of Navbar -->
                 <!-- Right Side Of Navbar -->
@@ -39,7 +48,7 @@
                         <a class="nav-link" href="{{ route('newProject') }}">{{ __('Create Project') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('profile.myProfile') }}">{{ __('My Profile') }}</a>
+                        <a class="nav-link" href="{{ route('myProfile') }}">{{ __('My Profile') }}</a>
                     </li>
 
                     @else
@@ -54,7 +63,7 @@
                             {{ Auth::user()->name }}
                         </a>
                         @if (auth()->check())
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-menu dropdown-menu-end text-center" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}

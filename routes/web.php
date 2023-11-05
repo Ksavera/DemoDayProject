@@ -20,7 +20,7 @@ Route::get('/', [HomeController::class, 'home'])->name('home');
 
 
 
-Route::get('/profile', [ProfileController::class, 'myProfile'])->name('profile.myProfile');
+Route::get('/profile', [ProfileController::class, 'myProfile'])->name('myProfile');
 Route::get('/profile/new', [ProfileController::class, 'newProfile'])->name('newProfile');
 Route::post('/profile/new', [ProfileController::class, 'saveProfile'])->name('saveProfile');
 Route::get('/profile/edit/{id}', [ProfileController::class, 'editProfile'])->name('editProfile');
@@ -36,3 +36,9 @@ Route::put('/profile/project/edit/{id}', [ProjectController::class, 'updateProje
 Route::delete('/profile/project/delete/{id}', [ProjectController::class, 'deleteProject'])->name('deleteProject');
 
 Route::get('/profile/{id}', [ProfileController::class, 'profileView'])->name('profileView');
+
+Route::get('/students', [ProfileController::class, 'getProfiles'])->name('students');
+Route::get('/projects', [ProjectController::class, 'getProjects'])->name('projects');
+
+Route::get('/students/location/{id}', [ProfileController::class, 'getStudentsFrom'])->name('students.From');
+Route::get('/students/profession/{id}', [ProfileController::class, 'getStudentsProfession'])->name('students.Profession');

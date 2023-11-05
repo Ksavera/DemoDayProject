@@ -1,7 +1,14 @@
+$brown: rgba(70, 59, 61, 0.826);
+$rose: rgb(199, 26, 84);
+$blue: rgba(1, 57, 117, 0.8);
+$sky-blue: #8d99ae;
+$light: #edf2f4;
+
 // Body
-$body-bg: #f8fafc;
+$body-bg: $light;
 
 // Typography
-$font-family-sans-serif: "Nunito", sans-serif;
-$font-size-base: 0.9rem;
-$line-height-base: 1.6;
+$body-color: $brown;
+$family: "Montserrat", sans-serif;
+$font-size-base: 1rem;
+$line-height-base: 2;

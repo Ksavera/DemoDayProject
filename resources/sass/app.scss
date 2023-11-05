@@ -1,19 +1,155 @@
 // Fonts
-@import url("https://fonts.bunny.net/css?family=Nunito");
+// @import url("https://fonts.bunny.net/css?family=Nunito");
 
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,400;0,600;0,800;1,200;1,400;1,600;1,800&display=swap");
 // Variables
 @import "variables";
 
 // Bootstrap
 @import "bootstrap/scss/bootstrap";
 
+// @media (max-width: 576px) {
+//     .gallery-item p {
+//         font-size: 12px;
+//     }
+// }
+
+.navbar-nav,
+body {
+    font-family: $family;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.top5 {
+    color: rgb(199, 26, 84);
+}
+.border-blue {
+    border: 1px solid;
+    border-color: $blue;
+}
+.btn-blue {
+    background-color: $sky-blue;
+    color: white;
+    border-color: $sky-blue;
+}
+.btn-blue:hover {
+    background-color: $blue;
+    color: white;
+    border-color: $blue;
+}
+
+.border-action {
+    border: 1px solid;
+    border-color: $blue;
+}
+.btn-action {
+    background-color: $blue;
+    color: white;
+    border-color: $blue;
+}
+.btn-action:hover {
+    background-color: $sky-blue;
+    color: white;
+    border-color: $sky-blue;
+}
+
+.border-delete {
+    border: 1px solid;
+    border-color: $blue;
+}
+.btn-delete {
+    background-color: $blue;
+    color: white;
+    border-color: $blue;
+}
+.btn-delete:hover {
+    background-color: #bd435b;
+    color: white;
+    border-color: #bd435b;
+}
+
+.edit-icon,
+.delete-icon,
+.close-icon {
+    font-size: 15px;
+}
+
+.circle-sky {
+    background-color: $sky-blue;
+    color: white;
+    width: 40px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.circle-red {
+    background-color: $rose;
+    color: white;
+    width: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-blue {
+    color: $blue;
+}
+.color-red {
+    background-color: $rose;
+}
+
+.color-red:hover {
+    background-color: $rose;
+    color: white;
+    border-color: $rose;
+}
+
+.color-sky {
+    background-color: $sky-blue;
+}
+.color-sky:hover {
+    background-color: $sky-blue;
+    color: white;
+    border-color: $sky-blue;
+}
+
+.link-custom {
+    text-decoration: none; /* No underline */
+    color: $brown; /* Blue color */
+}
+
+.link-custom:hover {
+    text-decoration: underline; /* Underline on hover */
+    color: $blue;
+}
+
 img {
-    float: left;
     width: 200px;
     height: 200px;
     object-fit: cover;
-    margin-right: 10px;
 }
+.profileImg {
+    width: 250px;
+    height: 250px;
+}
+
+//Gallery
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+}
+
+.gallery-item {
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
+
 .card-img-top {
     height: 225px;
     width: 100%;
@@ -55,4 +191,47 @@ img {
     width: 100%;
     height: 100%;
     object-fit: contain;
+}
+// .contacts-cover {
+//     background-image: url("/photos/sign-in-2-d.png");
+//     background-size: cover;
+//     background-position: center;
+//     height: 200px;
+//     width: 200px;
+// }
+.link-body-emphasis:hover {
+    color: red;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.profile-special img {
+    --color: rgba(2, 75, 153, 0.537);
+
+    // --color: rgba(23, 75, 153, 0.537); /* the border color */
+    --border: 6px; /* the border thickness*/
+    --offset: 10px; /* control the offset*/
+    --gap: 5px; /* the gap on hover */
+
+    --_c: var(--color) var(--border), #0000 0 calc(100% - var(--border)),
+        var(--color) 0;
+    --_o: calc(3 * var(--offset));
+    padding: calc(var(--gap) + var(--border))
+        calc(var(--gap) + var(--border) + var(--offset))
+        calc(var(--gap) + var(--border) + var(--offset))
+        calc(var(--gap) + var(--border));
+    background: linear-gradient(var(--_c)) var(--_o) var(--_o),
+        linear-gradient(90deg, var(--_c)) var(--_o) var(--_o);
+    background-size: calc(100% - var(--_o)) calc(100% - var(--_o));
+    background-repeat: no-repeat;
+    filter: brightness(1.1) grayscale(0.3);
+    transition: 0.5s;
+    cursor: pointer;
+}
+.profile-special img:hover {
+    background-position: 0px 0px;
+    background-size: calc(100% - var(--offset)) calc(100% - var(--offset));
+    filter: grayscale(0);
 }

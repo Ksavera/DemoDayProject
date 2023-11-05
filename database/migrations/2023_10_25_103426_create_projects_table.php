@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('photo');
             $table->string('description');
             $table->string('github');
-            $table->string('likes')->nullable();
             $table->foreignId('category_id')->nullable()->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('profile_id')->nullable()->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();

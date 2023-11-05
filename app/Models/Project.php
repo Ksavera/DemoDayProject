@@ -31,4 +31,8 @@ class Project extends Model
     {
         return $this->hasmany(Like::class);
     }
+    public function isLikedByUser($userId)
+    {
+        return optional($this->likes)->contains('user_id', $userId);
+    }
 }

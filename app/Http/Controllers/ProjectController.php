@@ -11,6 +11,12 @@ use Illuminate\Http\Request;
 class ProjectController extends Controller
 {
 
+    public function getProjects()
+    {
+        $projects = Project::all();
+        return view('pages.projects', ['projects' => $projects]);
+    }
+
 
     public function newProject()
     {
@@ -40,7 +46,7 @@ class ProjectController extends Controller
 
 
         // Redirect to the profile page with a success message
-        return redirect()->route('profile.myProfile')->with('success', 'Project uploaded successfully');
+        return redirect()->route('myProfile')->with('success', 'Project uploaded successfully');
     }
 
     public function editProject(int $id)
@@ -98,13 +104,10 @@ class ProjectController extends Controller
         $project->description = $validated['description'];
         $project->github = $validated['github'];
 
-
-
-        // ... other fields
         $project->save();
 
         // Redirect to the profile page with a success message
-        return redirect()->route('profile.myProfile')->with('success', 'Project updated successfully');
+        return redirect()->route('myProfile')->with('success', 'Project updated successfully');
     }
 
 
@@ -114,7 +117,7 @@ class ProjectController extends Controller
         $project = Project::find($id);
 
         if (!$project) {
-            return redirect()->route('profile.myProject')->with('error', 'Project not found');
+            return redirect()->route('pages.myProject')->with('error', 'Project not found');
         }
 
         // Delete the profile image if it exists
@@ -125,6 +128,6 @@ class ProjectController extends Controller
         // Delete the profile record
         $project->delete();
 
-        return redirect()->route('profile.myProfile')->with('success', 'Project deleted successfully');
+        return redirect()->route('myProfile')->with('success', 'Project deleted successfully');
     }
 }

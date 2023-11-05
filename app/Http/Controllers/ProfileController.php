@@ -28,7 +28,7 @@ class ProfileController extends Controller
             $categories = $projects->load('category');
         }
 
-        return view('profile.myProfile', ['profiles' => $profiles, 'projects' => $projects, 'categories' => $categories]);
+        return view('pages.myProfile', ['profiles' => $profiles, 'projects' => $projects, 'categories' => $categories]);
     }
 
 
@@ -46,14 +46,32 @@ class ProfileController extends Controller
 
             $profile = $profiles->first();
 
+            $profile->increment('views');
+
             $projects = Project::where('profile_id', $profile->id)->get();
             $categories = $projects->load('category');
         }
 
-        return view('profile.myProfile', ['profiles' => $profiles, 'projects' => $projects, 'categories' => $categories]);
+        return view('pages.myProfile', ['profiles' => $profiles, 'projects' => $projects, 'categories' => $categories]);
     }
 
+    public function getProfiles()
+    {
+        $profiles = Profile::with('user')->orderBy('views', 'desc')->get();
+        return view('pages.students', ['profiles' => $profiles]);
+    }
 
+    public function getStudentsFrom(int $location_id)
+    {
+        $profiles = Profile::where('location_id', $location_id)->get();
+        return view('pages.students', ['profiles' => $profiles]);
+    }
+
+    public function getStudentsProfession(int $category_id)
+    {
+        $profiles = Profile::where('category_id', $category_id)->get();
+        return view('pages.students', ['profiles' => $profiles]);
+    }
 
 
     public function newProfile()
@@ -92,7 +110,7 @@ class ProfileController extends Controller
 
 
         // Redirect to the profile page with a success message
-        return redirect()->route('profile.myProfile')->with('success', 'Profile uploaded successfully');
+        return redirect()->route('myProfile')->with('success', 'Profile uploaded successfully');
     }
 
     public function editProfile(int $id)
@@ -111,6 +129,7 @@ class ProfileController extends Controller
 
     public function updateProfile(int $id, Request $request)
     {
+
         $validated = $request->validate(
 
             [
@@ -122,6 +141,8 @@ class ProfileController extends Controller
                 'linkedin' => 'required|min:3',
                 'github' => 'required|min:3',
                 'phone' => 'required|min:3',
+                'category' => 'nullable',
+                'location' => 'nullable',
             ],
 
         );
@@ -144,6 +165,7 @@ class ProfileController extends Controller
         }
 
 
+
         $profile->first_name = $validated['first_name'];
         $profile->last_name = $validated['last_name'];
         $profile->skills = $validated['skills'];
@@ -151,13 +173,18 @@ class ProfileController extends Controller
         $profile->linkedin = $validated['linkedin'];
         $profile->github = $validated['github'];
         $profile->phone = $validated['phone'];
+        $profile->category_id = $validated['category'];
+        $profile->location_id = $validated['location'];
+
+
 
         // ... other fields
         $profile->save();
 
         // Redirect to the profile page with a success message
-        return redirect()->route('profile.myProfile')->with('success', 'Profile updated successfully');
+        return redirect()->route('myProfile')->with('success', 'Profile updated successfully');
     }
+
 
     public function deleteProfile(int $id)
     {
