@@ -2,23 +2,25 @@
 @section('profileForm')
 
 
-@if(session()->has('success'))
-<div class="container alert alert-success alert-dismissible fade show w-50 d-flex justify-content-between align-items-center" role="alert">
-    <strong>{{ session()->get('success') }}</strong>
-    <button type="button" class="close btn btn-outline-dark" data-bs-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
+<div class="d-flex flex-column justify-content-center align-items-center pb-2 pt-0">
+    @if(session()->has('success'))
+    <div class="py-2 container alert displaystyle displaystyle-successs alert-dismissible fade show col-4 d-flex justify-content-between align-items-center text-blue" role="alert">
+        <strong>{{ session()->get('success') }}</strong>
+        <button type="button" class="close btn border-blue py-0" data-bs-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @elseif($errors->any())
+    @foreach($errors->all() as $error)
+    <div class="py-2 container alert displaystyle displaystyle-danger alert-dismissible fade show col-4 d-flex justify-content-between align-items-center text-white" role="alert">
+        <strong>{{ $error }}</strong><br>
+        <button type="button" class="close btn py-0 border-white" data-bs-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endforeach
+    @endif
 </div>
-@elseif($errors->any())
-@foreach($errors->all() as $error)
-<div class="container alert alert-danger alert-dismissible fade show w-50 d-flex justify-content-between align-items-center" role="alert">
-    <strong>{{ $error }}</strong><br>
-    <button type="button" class="close btn btn-outline-dark" data-bs-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-@endforeach
-@endif
 
 <div class="container w-25 border pb-2 mb-5">
     <form action="{{ isset($profile) ? route('updateProfile', $profile->id) : route('saveProfile') }}" method="POST" enctype="multipart/form-data">

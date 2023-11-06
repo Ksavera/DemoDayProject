@@ -14,15 +14,72 @@
 //     }
 // }
 
+.logo {
+    width: 20px;
+    height: 20px;
+}
 .navbar-nav,
 body {
     font-family: $family;
     font-weight: 400;
     font-size: 16px;
 }
+.displaystyle {
+    padding: 15px;
+    margin: 15px;
+    margin-bottom: 10px;
+    border: 1px solid;
+}
+.displaystyle-success {
+    border-color: $sky-blue;
+    background-color: $sky-blue;
+}
+
+.displaystyle-success:hover {
+    border-color: $blue;
+    background-color: $blue;
+}
+.displaystyle-danger {
+    border-color: $rose;
+    background-color: $rose;
+}
+.displaystyle-danger:hover {
+    border-color: rgb(163, 21, 68);
+    background-color: rgb(163, 21, 68);
+}
+.displaystyle-no {
+    border-color: white;
+    background-color: white;
+}
+
+.displaystyle-no:hover {
+    border-color: rgb(163, 21, 68);
+    background-color: rgb(163, 21, 68);
+}
+
+.border-rose {
+    border-color: $rose;
+}
+.border-blue {
+    border-color: $blue;
+}
+.border-white {
+    border-color: white;
+    color: white;
+}
+
+.text-blue {
+    color: $blue;
+}
+.color-red {
+    background-color: $rose;
+}
+.color-rose {
+    color: $rose;
+}
 
 .top5 {
-    color: rgb(199, 26, 84);
+    color: $brown;
 }
 .border-blue {
     border: 1px solid;
@@ -93,13 +150,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.text-blue {
-    color: $blue;
-}
-.color-red {
-    background-color: $rose;
 }
 
 .color-red:hover {

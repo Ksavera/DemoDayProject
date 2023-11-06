@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Profile;
 use App\Models\Project;
+use App\Models\Like;
 use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Http\Request;
@@ -13,7 +14,12 @@ class ProjectController extends Controller
 
     public function getProjects()
     {
-        $projects = Project::all();
+        $projects = Project::with(['profile', 'likes'])
+            ->addSelect([
+                'likes_count' => Like::selectRaw('count(*)')
+                    ->whereColumn('project_id', 'projects.id')
+            ])
+            ->orderByDesc('likes_count')->get();
         return view('pages.projects', ['projects' => $projects]);
     }
 
