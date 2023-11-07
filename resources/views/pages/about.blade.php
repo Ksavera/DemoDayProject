@@ -5,7 +5,7 @@
     <div class="d-flex bg-white rounded-4 p-4 gap-5 justify-content-center">
         <div class="col-3 my-4 text-center">
             <p class="text-center">Contact me: </p>
-            <h5>Ksavera Armonavičienė</h5>
+            <h6>Ksavera Armonavičienė</h6>
         </div>
         <div class="col-3 about-center">
             <img src="{{ asset('photos/githubKA.png') }}" alt="">
