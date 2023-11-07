@@ -4,18 +4,18 @@
 
 
 <h6>Vieša sritis</h6>
-- Viešoj srity galima matyti TOP5 studentus, kurie rūšiuojami pagal peržiūrų skaičių.
-- Viešoj srity galima matyti TOP5 projektus, kurie rūšiuojami pagal 'likes' skaičių.
-- Viešoj srity matyti visus studentus, visus projektus.
-- Kiekvienas studentas turi peržiūrų skaičių, lokaciją ir profesiją.
-- Galimas rūšiavimas pagal lokaciją ir profesija tarp studentų profilių.
-- Kiekvienas projektas turi nuorodas į to projekto studneto profilį ir github psl.
+- Viešoj srity galima matyti TOP5 studentus, kurie rūšiuojami pagal peržiūrų skaičių. <br>
+- Viešoj srity galima matyti TOP5 projektus, kurie rūšiuojami pagal 'likes' skaičių.<br>
+- Viešoj srity matyti visus studentus, visus projektus.<br>
+- Kiekvienas studentas turi peržiūrų skaičių, lokaciją ir profesiją.<br>
+- Galimas rūšiavimas pagal lokaciją ir profesija tarp studentų profilių.<br>
+- Kiekvienas projektas turi nuorodas į to projekto studneto profilį ir github psl.<br>
 
 <h6>Vartotojo sritis</h6>
-- Galimybe prisiregistruoti prie puslapio ir susikurti savo profilį.
-- Susikūrus savo profilį, galima įsikelti savo projektus.
-- Tiek profilį, tiek projektus galima tvarkyti ir atnaujinti. Taip pat ištrinti.
-- Prisijungusiam vartotojui galima "like'inti" tik kito studento projektus, savo ne.
+- Galimybe prisiregistruoti prie puslapio ir susikurti savo profilį.<br>
+- Susikūrus savo profilį, galima įsikelti savo projektus.<br>
+- Tiek profilį, tiek projektus galima tvarkyti ir atnaujinti. Taip pat ištrinti.<br>
+- Prisijungusiam vartotojui galima "like'inti" tik kito studento projektus, savo ne.<br>
 
 
 
