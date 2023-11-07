@@ -15,8 +15,8 @@
 // }
 
 .logo {
-    width: 20px;
-    height: 20px;
+    width: 50px;
+    height: 50px;
 }
 .navbar-nav,
 body {
@@ -261,6 +261,7 @@ img {
     --color: rgba(2, 75, 153, 0.537);
 
     // --color: rgba(23, 75, 153, 0.537); /* the border color */
+
     --border: 6px; /* the border thickness*/
     --offset: 10px; /* control the offset*/
     --gap: 5px; /* the gap on hover */
@@ -284,4 +285,52 @@ img {
     background-position: 0px 0px;
     background-size: calc(100% - var(--offset)) calc(100% - var(--offset));
     filter: grayscale(0);
+}
+
+.links-special img {
+    --color: rgba(2, 75, 153, 0.537);
+
+    // --color: rgba(23, 75, 153, 0.537); /* the border color */
+
+    --border: 10px; /* the border thickness*/
+    --offset: 6px; /* control the offset*/
+    --gap: 5px; /* the gap on hover */
+
+    --_c: var(--color) var(--border), #0000 0 calc(100% - var(--border)),
+        var(--color) 0;
+    --_o: calc(3 * var(--offset));
+    padding: calc(var(--gap) + var(--border))
+        calc(var(--gap) + var(--border) + var(--offset))
+        calc(var(--gap) + var(--border) + var(--offset))
+        calc(var(--gap) + var(--border));
+    background: linear-gradient(var(--_c)) var(--_o) var(--_o),
+        linear-gradient(90deg, var(--_c)) var(--_o) var(--_o);
+    background-size: calc(100% - var(--_o)) calc(100% - var(--_o));
+    background-repeat: no-repeat;
+    filter: brightness(1.1) grayscale(0.3);
+    transition: 0.5s;
+    cursor: pointer;
+}
+.links-special img:hover {
+    background-position: 0px 0px;
+    background-size: calc(100% - var(--offset)) calc(100% - var(--offset));
+    filter: grayscale(0);
+}
+
+.about {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.about-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.about-center img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }

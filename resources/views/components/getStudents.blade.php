@@ -8,7 +8,7 @@
     <div class="profile-special col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 p-0">
         <a href="{{route('profileView', $profile->id)}}" class="link-underline link-underline-opacity-0 link-body-emphasis">
             <img src="{{ asset('storage/' . $profile->profile_image) }}" class="rounded-circle">
-            <h6 class="text-center mt-2 m-3">{{$profile->first_name}} {{$profile->last_name}}</h6>
+            <h6 class="text-center mt-2">{{$profile->first_name}} {{$profile->last_name}}</h6>
         </a>
         @if(Route::is('students*'))
         <a href="{{route('students.From', $profile->location_id)}}" class="link-underline link-underline-opacity-0 link-body-emphasis">

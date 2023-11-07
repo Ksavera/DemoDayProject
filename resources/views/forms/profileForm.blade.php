@@ -5,7 +5,7 @@
 <div class="d-flex flex-column justify-content-center align-items-center pb-2 pt-0">
     @if(session()->has('success'))
     <div class="py-2 container alert displaystyle displaystyle-successs alert-dismissible fade show col-4 d-flex justify-content-between align-items-center text-blue" role="alert">
-        <strong>{{ session()->get('success') }}</strong>
+        {{ session()->get('success') }}
         <button type="button" class="close btn border-blue py-0" data-bs-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -13,7 +13,7 @@
     @elseif($errors->any())
     @foreach($errors->all() as $error)
     <div class="py-2 container alert displaystyle displaystyle-danger alert-dismissible fade show col-4 d-flex justify-content-between align-items-center text-white" role="alert">
-        <strong>{{ $error }}</strong><br>
+        {{ $error }}<br>
         <button type="button" class="close btn py-0 border-white" data-bs-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -22,7 +22,7 @@
     @endif
 </div>
 
-<div class="container w-25 border pb-2 mb-5">
+<div class="container w-25 border pb-2 mb-5 shadow-lg bg-white rounded-4 p-4">
     <form action="{{ isset($profile) ? route('updateProfile', $profile->id) : route('saveProfile') }}" method="POST" enctype="multipart/form-data">
         @csrf
         @if(isset($profile))
@@ -83,8 +83,7 @@
             </div>
             <div class="d-flex justify-content-end gap-3">
                 <div class="mt-3 d-flex justify-content-end">
-                    <button type="submit" class="btn btn-outline-primary" value="create">{{ isset($profile) ? 'Update' : 'Save' }}</button>
-
+                    <button type="submit" class="btn displaystyle displaystyle-success text-white py-1 px-2" value="create">{{ isset($profile) ? 'Update' : 'Save' }}</button>
                 </div>
             </div>
 

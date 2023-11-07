@@ -29,13 +29,20 @@
                         {{$project->profile->first_name}} {{$project->profile->last_name}}</a> | <a href="{{$project->github}}" class="link-custom"><i class="bi bi-github"></i> Project's github</a>
 
                 </h6>
+                @php
+                $userId = auth()->user() ? auth()->user()->id : null;
+                $ownerId = $project->profile_id;
+                $isOwner = ($userId === $ownerId);
+                $isLikedByUser = $project->likes->contains('user_id', $userId);
+                @endphp
+
+                @if (!$isOwner)
                 <h5 class="color-rose ms-auto cursor-pointer">
-                    @php
-                    $userId = auth()->user() ? auth()->user()->id : null;
-                    $isLikedByUser = $project->likes->contains('user_id', $userId);
-                    @endphp
-                    <i id="{{ $project->id }}" onclick="callApi(this)" class="bi bi-balloon-heart{{ $isLikedByUser ? '-fill' : '' }} mx-5">{{ optional($project->likes)->count() ?? 0 }}</i>
+                    <i id="{{ $project->id }}" onclick="callApi(this)" class="bi bi-balloon-heart{{ $isLikedByUser ? '-fill' : '' }} mx-5" {{ $isOwner ? 'disabled' : '' }}>{{ optional($project->likes)->count() ?? 0 }}</i>
                 </h5>
+                @endif
+
+
 
 
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
