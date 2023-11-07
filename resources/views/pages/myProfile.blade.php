@@ -4,7 +4,7 @@
  <div class="d-flex justify-content-center pb-2 pt-0">
      @if(session()->has('success'))
      <div class="py-2 container alert displaystyle displaystyle-successs alert-dismissible fade show col-4 d-flex justify-content-between align-items-center text-blue" role="alert">
-         <strong>{{ session()->get('success') }}</strong>
+         {{ session()->get('success') }}
          <button type="button" class="close btn border-blue py-0" data-bs-dismiss="alert" aria-label="Close">
              <span aria-hidden="true">&times;</span>
          </button>
@@ -12,7 +12,7 @@
      @elseif($errors->any())
      @foreach($errors->all() as $error)
      <div class="py-2 container alert displaystyle displaystyle-danger alert-dismissible fade show col-4 d-flex justify-content-between align-items-center text-white" role="alert">
-         <strong>{{ $error }}</strong><br>
+         {{ $error }}<br>
          <button type="button" class="close btn py-0 border-rose" data-bs-dismiss="alert" aria-label="Close">
              <span aria-hidden="true">&times;</span>
          </button>
@@ -31,7 +31,7 @@
                  <div class="col-xl-3 col-lg-3 col-md-5 col-sm-12 shadow-lg rounded-4 text-center">
                      @foreach ($profiles as $profile)
 
-                     <div class="row my-3 mx-2 align-items-center">
+                     <div class="row my-3 mx-1 align-items-center">
                          <!-- Views and likes -->
                          <div class="col-6 p-0">
                              <div class="d-flex gap-2">
@@ -79,17 +79,28 @@
                      <h5 class="mt-3 " style="font-weight: 600;">{{$profile->first_name}} {{$profile->last_name}}</h5>
                      <h6 class=""><i>{{$profile->category->name}}</i></h6>
                      <p class=" m-0 mb-2"><i class="bi bi-geo-alt-fill"></i> Location: {{$profile->location->name}}</p>
-                     @if($profile->github)
-                     <a href="{{$profile->github}}" class="btn btn-sm btn-blue text-white rounded-4 px-3 py-0 mb-2"><i class="bi bi-github"></i> github</a>
-                     @endif
-                     @if($profile->linkedin)
-                     <a href="{{$profile->linkedin}}" class="btn btn-sm btn-blue text-white rounded-4 px-3 py-0 mb-2"><i class="bi bi-linkedin"></i> linkedin</a>
-                     @endif
-                     @if($profile->phone)
-                     <button type="button" class="btn btn-sm btn-blue text-white rounded-4 px-3 py-0" data-bs-toggle="popover" data-bs-title="Phone number" data-bs-content="{{$profile->phone}}"><i class="bi bi-telephone-fill"></i> phone</button>
-                     @endif
-                     <h6 class="mt-4"><i>My strongest skills: </i> {{$profile->skills}} Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatibus, vel.</h6>
-                     <h6 class="text-justify"><i>About me: </i> {{ucfirst($profile->about)}} Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, voluptas! Quis animi obcaecati magni molestiae dolor aliquam harum dolore iusto ipsum. Cumque tempora voluptates voluptate tempore illo dolores velit magni, repellat at. Molestiae neque quibusdam natus repellat nisi minus hic similique velit sapiente repellendus. Officiis reprehenderit dolore magni soluta rerum!</h6>
+
+                     <div class="d-flex flex-column justify-content-center align-items-center">
+                         <div class="col-4">
+                             @if($profile->github)
+                             <a href="{{$profile->github}}" class="btn btn-sm btn-blue text-white rounded-4  py-0 mb-2"><i class="bi bi-github"></i> github</a>
+                             @endif
+                         </div>
+                         <div class="col-5">
+                             @if($profile->linkedin)
+                             <a href="{{$profile->linkedin}}" class="btn btn-sm btn-blue text-white rounded-4  py-0 mb-2"><i class="bi bi-linkedin"></i> linkedin</a>
+                             @endif
+                         </div>
+                         <div class="col-6">
+                             @if($profile->phone)
+                             <a class="btn btn-sm btn-blue text-white rounded-4  py-0 mb-2"><i class="bi bi-telephone-fill"></i> {{$profile->phone}}</a>
+                             @endif
+                         </div>
+                     </div>
+
+
+                     <h6 class="mt-4"><i>My strongest skills: </i> {{$profile->skills}}</h6>
+                     <h6 class="text-justify"><i>About me: </i> {{ucfirst($profile->about)}}</h6>
                      @endforeach
                  </div>
                  <!-- gallery column -->
@@ -119,12 +130,26 @@
                                  <div class="modal-content my-3">
                                      <div class="modal-header py-3">
                                          <h6 class="modal-title px-5" id="exampleModalLabel">Project title: {{$project->name}} | <a href="{{$project->github}}" class="link-custom"><i class="bi bi-github"></i> Project's github</a></h6>
+                                         @php
+                                         $userId = auth()->user() ? auth()->user()->id : null;
+                                         $ownerId = $project->profile_id;
+                                         $isOwner = ($userId === $ownerId);
+                                         $isLikedByUser = $project->likes->contains('user_id', $userId);
+                                         @endphp
+
+                                         @if (!$isOwner)
+                                         <h5 class="color-rose ms-auto cursor-pointer">
+                                             <i id="{{ $project->id }}" onclick="callApi(this)" class="bi bi-balloon-heart{{ $isLikedByUser ? '-fill' : '' }} mx-5" {{ $isOwner ? 'disabled' : '' }}>{{ optional($project->likes)->count() ?? 0 }}</i>
+                                         </h5>
+                                         @endif
+
 
                                          <div class="d-flex gap-1">
                                              @auth
                                              @if (auth()->id() == $profile->user_id)
                                              <a href="{{ route('editProject', $project['id']) }}" class="btn btn-sm btn-action rounded-circle my-auto"><i class="bi bi-pencil-square edit-icon px-1"></i></a>
-                                             <button type="button" class="btn btn-sm btn-delete rounded-circle" onclick="document.getElementById('modal2').style.display='block'"><i class="bi bi-trash-fill delete-icon px-1"></i></button>
+                                             <button type="button" class="btn btn-sm btn-delete rounded-circle" data-bs-toggle="modal" data-bs-target="#deleteModal{{$project->id}}"><i class="bi bi-trash-fill delete-icon px-1"></i></button>
+
                                              @endif
                                              @endauth
                                              <button type="button" class="btn btn-action py-1 rounded-circle" data-bs-dismiss="modal"><i class="bi bi-x-square-fill close-icon"></i></button>
@@ -145,7 +170,9 @@
 
                      <!-- Project Delete modal -->
 
-                     <div class="modal" tabindex="-1" id="modal2">
+                     <!-- Project Delete modal -->
+                     @foreach ($projects as $project)
+                     <div class="modal" tabindex="-1" id="deleteModal{{$project->id}}">
                          <div class="modal-dialog border-rose shadow-sm">
                              <div class="modal-content color-red">
                                  <div class="modal-body">
@@ -164,6 +191,8 @@
                              </div>
                          </div>
                      </div>
+                     @endforeach
+
 
 
 
@@ -182,5 +211,37 @@
      document.querySelectorAll('[data-bs-toggle="popover"]').forEach(element => {
          new bootstrap.Popover(element);
      });
+
+     function callApi(element) {
+
+         var projectId = element.id;
+         //  console.log(projectId);
+         var apiToken = "{{ session('api_token') }}";
+         console.log(apiToken);
+
+         fetch(`/api/project/${projectId}/like`, {
+                 method: 'POST',
+                 headers: {
+                     'Accept': 'application/json',
+                     'Authorization': 'Bearer ' + apiToken,
+                     'Content-Type': 'application/json',
+                 },
+             })
+             .then(response => response.json())
+             .then(data => {
+                 console.log(data);
+                 if (data.message === 'Project liked') {
+                     element.classList.remove('bi-balloon-heart');
+                     element.classList.add('bi-balloon-heart-fill');
+                 } else {
+                     element.classList.remove('bi-balloon-heart-fill');
+                     element.classList.add('bi-balloon-heart');
+                 }
+             })
+             .catch(error => {
+                 console.error('Error:', error);
+             });
+     }
  </script>
+
  @endsection

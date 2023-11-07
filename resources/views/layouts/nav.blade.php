@@ -1,10 +1,10 @@
 <header>
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
-            <!-- <a class="navbar-brand" href="{{ url('/') }}">
-                <img src="{{url('/photos/logo.png')}}" class="logo" alt="logo">
-                {{ config('app.name', 'KA') }}
-            </a> -->
+            <a class="navbar-brand text-muted border rounded-circle px-2 py-0 shadow" href="{{ route('about') }}">{{ config('app.name', 'KA') }}</a>
+
+
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
             </button>

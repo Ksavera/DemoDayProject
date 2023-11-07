@@ -9,15 +9,12 @@ use Symfony\Component\HttpKernel\Profiler\Profile;
 
 Auth::routes();
 
-Route::get('/welcome', function () {
-    return view('welcome');
-});
+Route::get('/about', function () {
+    return view('pages.about');
+})->name('about');
+
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
-
-
-
-
 
 
 Route::get('/profile', [ProfileController::class, 'myProfile'])->name('myProfile');
