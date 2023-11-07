@@ -1,7 +1,7 @@
 ## DemoDay projektas - Studentai ir jų projektai.
 
-<h3>DemoDay projektas yrs skirtas studentams parodyti savo projektus.</h3>
-<h3>Šioj aplikacijoj galima:</h3>
+<h4>DemoDay projektas yrs skirtas studentams parodyti savo projektus.</h4>
+
 
 <h6>Vieša sritis</h6>
 - Viešoj srity galima matyti TOP5 studentus, kurie rūšiuojami pagal peržiūrų skaičių.
