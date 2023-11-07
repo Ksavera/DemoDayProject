@@ -1,5 +1,3 @@
-
-
 ## DemoDay projektas - Studentai ir jų projektai.
 
 <h3>DemoDay projektas yrs skirtas studentams parodyti savo projektus. Šioj aplikacijoj galima:</h3>
