@@ -25,3 +25,8 @@ Duomenų bazė ir sąryšiai.
 
 ![db](https://github.com/Ksavera/DemoDayProject/assets/99336407/5240e70c-4076-4e53-bb57-f458ec13a88c)
 
+## Projekto kūrimas.
+
+- Projektas programuotas su Laravel 10, JS. <br>
+- Naudotasi MVC struktūra. <br>
+- Dizainas: Bootstrap biblioteka.
